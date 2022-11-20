@@ -1,11 +1,15 @@
 import React from "react";
 // import PropTypes from "prop-types";
-import { AppBar, Badge, Button, IconButton, Toolbar, Typography } from "@mui/material";
+import { AppBar, Autocomplete, Badge, Button, IconButton, MenuItem, Select, TextField, Toolbar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useSelector } from "react-redux";
 import { getItemCount } from "../utils";
 // import styled from "@emotion/styled";
 import {styled,alpha} from "@mui/material/styles"
+import { Menu } from "@mui/icons-material";
+import { MenuItemUnstyled } from "@mui/base";
+
+
 
 
 const Search = styled("section")(({theme})=>({
@@ -21,8 +25,32 @@ const Search = styled("section")(({theme})=>({
   width: "100%",
 }))
 function SearchBar(){
+  const products = useSelector(state=> state.products.value)
   return (
-    <Search></Search>
+    <Search>
+      <Select size="small" sx={{
+        m:1,
+        "&":{},
+      }}
+      
+      variant="standard"
+      labelId="selected-category-id"
+      id="selected-category-id"
+      >
+        <MenuItem value="all">
+        all
+        </MenuItem>
+
+      </Select>
+        
+      <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      sx={{ width: 300}}
+      options={Array.from(products, prod=> ({id: prod.id,label: prod.title}))}
+      renderInput={(params)=> <TextField {...params}  /> }
+      />
+    </Search>
   )
 }
 
