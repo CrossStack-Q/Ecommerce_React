@@ -15,20 +15,27 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../features/cart-slice";
 import { fetAllProducts } from "../features/product-slice";
+import { useSearchParams } from "react-router-dom";
 
 const Home = () => {
   const state = useSelector(state => state.products )
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get("category");
   const {value: products,loading} = state ?? {};
   const dispatch = useDispatch();
+
   const theme = useTheme();
 
   // useEffect(() => {
     
   //   fetALlProducts();
   // }, []);
-  if(!products?.length) {
-    dispatch(fetAllProducts())
-  }
+  useEffect(()=>{
+    if(!products?.length) {
+      dispatch(fetAllProducts())
+    }
+  },[])
+  
 
 
 
@@ -39,11 +46,17 @@ const Home = () => {
     dispatch (addToCart({product,quantity:1}))
   }
 
+
+
+
+  let filteredProducts = category && category !== "all" ? products.filter((prod)=> prod.category === category) : products;
+
+
   return (
 
     <Container sx={{ py: 8 }} maxWidth="lg">
       <Grid container spacing={4}>
-        {products?.map(({ title, id, price, description, rating, image }) => (
+        {filteredProducts?.map(({ title, id, price, description, rating, image }) => (
           <Grid item key={id} xs={12} sm={6} md={3}>
             <Card
               sx={{ height: "100%", display: "flex", flexDirection: "column" }}

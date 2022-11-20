@@ -1,13 +1,15 @@
-import React from "react";
+import React,{useState} from "react";
 // import PropTypes from "prop-types";
 import { AppBar, Autocomplete, Badge, Button, IconButton, MenuItem, Select, TextField, Toolbar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getItemCount } from "../utils";
 // import styled from "@emotion/styled";
 import {styled,alpha} from "@mui/material/styles"
 import { Menu } from "@mui/icons-material";
 import { MenuItemUnstyled } from "@mui/base";
+import { fetAllCategories } from "../features/categories-slice";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -26,28 +28,62 @@ const Search = styled("section")(({theme})=>({
 }))
 function SearchBar(){
   const products = useSelector(state=> state.products.value)
+  const categories = useSelector(state=> state.categories.value)
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  if(!categories.length){
+    dispatch(fetAllCategories())
+  }
+
+  function handleSearchChange(searchTerm){
+    if(searchTerm){
+      navigate(selectedCategory ==="all"?`?searchterm=${searchTerm}`: `/?category=${selectedCategory}&searchterm=${searchTerm}`)
+    }
+    else{
+      navigate(selectedCategory ==="all"?`/`: `/?category=${selectedCategory}`)
+    }
+  }
+
   return (
     <Search>
       <Select size="small" sx={{
         m:1,
         "&":{},
+        textTransform: "capitalize"
+        
       }}
-      
+      value={selectedCategory}
       variant="standard"
       labelId="selected-category-id"
       id="selected-category-id"
+      onChange={(e)=>{
+        setSelectedCategory(e.target.value);
+        var valuenow = e.target.value;
+        navigate(selectedCategory === "all" ? "/": `/?category=${valuenow}`);
+      }}
       >
-        <MenuItem value="all">
+        <MenuItem
+        sx={{
+          textTransform: "capitalize"
+        }}
+        value="all">
         all
         </MenuItem>
-
+        {categories?.map(category=> <MenuItem sx={{textTransform: "capitalize"}} value={category} key={category} >
+          {category}
+        </MenuItem>)}
       </Select>
         
       <Autocomplete
+      onChange={(e,value)=> {
+        console.log(value);
+        handleSearchChange(value?.label)
+      }}
       disablePortal
       id="combo-box-demo"
       sx={{ width: 300}}
-      options={Array.from(products, prod=> ({id: prod.id,label: prod.title}))}
+      options={Array.from( selectedCategory ==="all" ? products : products.filter((prod)=> prod.category === selectedCategory ) , prod=> ({id: prod.id,label: prod.title}))}
       renderInput={(params)=> <TextField {...params}  /> }
       />
     </Search>
