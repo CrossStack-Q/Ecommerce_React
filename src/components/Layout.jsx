@@ -1,0 +1,27 @@
+import React from "react";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import Header from "./Header";
+import { Outlet } from "react-router-dom";
+
+const theme = createTheme({
+  palette: {
+    mode: "light",
+  },
+});
+
+const Layout = () => {
+  return (
+    <div className="">
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Header />
+        <main className="w-screen overflow-hidden h-screen overflow-y-scroll">
+          <Outlet />
+        </main>
+        <footer>this is footer</footer>
+      </ThemeProvider>
+    </div>
+  );
+};
+
+export default Layout;
