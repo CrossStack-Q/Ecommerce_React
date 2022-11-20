@@ -121,7 +121,7 @@ const Header = (props) => {
           variant="h6"
           
         >
-          Ecom tu
+          Ecom
         </Typography>
         <SearchBar />
         <Box sx={{display :{xs:"flex", md:"flex"}}}>
