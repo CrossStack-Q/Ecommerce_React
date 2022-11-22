@@ -144,6 +144,11 @@ function SearchBar() {
 const Header = (props) => {
   const cartItems = useSelector((state) => state.cart?.value);
   const count = getItemCount(cartItems);
+
+  const navigate = useNavigate()
+  function navigateToCart(){
+    navigate("/cart");
+  }
   return (
     <AppBar position="sticky">
       <Toolbar>
@@ -175,6 +180,7 @@ const Header = (props) => {
             size="large"
             aria-label="shows cart items count"
             color="inherit"
+            onClick={()=>{navigateToCart()}}
           >
             <Badge badgeContent={count} color="error">
               <svg
