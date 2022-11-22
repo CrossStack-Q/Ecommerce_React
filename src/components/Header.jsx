@@ -21,7 +21,7 @@ import { Menu } from "@mui/icons-material";
 import { MenuItemUnstyled } from "@mui/base";
 
 import { fetAllCategories } from "../features/categories-slice";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 const Search = styled("section")(({ theme }) => ({
   position: "relative",
@@ -147,9 +147,11 @@ const Header = (props) => {
   return (
     <AppBar position="sticky">
       <Toolbar>
+        <Link to="/" >
         <Typography color="inherit" variant="h6">
           Ecomme
         </Typography>
+        </Link>
         <SearchBar />
         <div>
           <svg
