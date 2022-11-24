@@ -1,34 +1,24 @@
-import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-
-export const fetAllCategories =  createAsyncThunk('categories/fetchAll' , async()=> {
-    const response = await fetch("https://fakestoreapi.com/products/categories").then(
-      (response) => response.json()
-    );
-    return await response;
+export const fetchAllCategories = createAsyncThunk('categories/fetchAll', async () => {
+    const response = await fetch("https://fakestoreapi.com/products/categories");
+    return await response.json();
 })
-
 
 const categoriesSlice = createSlice({
-    name:"product",
+    name: "categories",
     initialState: {
         value: [],
-        loading:false
-    },
-    extraReducers:(buider)=>{
-        buider.addCase(fetAllCategories.pending, (state)=> {
+        loading: false
+    }, extraReducers: (builder) => {
+        builder.addCase(fetchAllCategories.pending, (state) => {
             state.loading = true;
-        } ) ;
-        buider.addCase(fetAllCategories.fulfilled, (state,action)=> {
+        });
+        builder.addCase(fetchAllCategories.fulfilled, (state, action) => {
             state.value = action.payload;
             state.loading = false;
-        } )
-
-
-
+        })
     }
 })
-
-
 
 export default categoriesSlice.reducer;

@@ -11,11 +11,11 @@ const theme = createTheme({
 
 const Layout = () => {
   return (
-    <div className="">
+    <div className="h-screen">
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header />
-        <main className="w-screen overflow-hidden h-screen overflow-y-scroll">
+        <main className="w-screen overflow-hidden overflow-y-scroll">
           <Outlet />
         </main>
         <footer>this is footer</footer>

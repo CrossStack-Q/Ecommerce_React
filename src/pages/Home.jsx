@@ -14,7 +14,7 @@ import {
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../features/cart-slice";
-import { fetAllProducts } from "../features/product-slice";
+import { fetchAllProducts } from "../features/products-slice";
 import { useSearchParams } from "react-router-dom";
 
 const Home = () => {
@@ -32,7 +32,7 @@ const Home = () => {
   // }, []);
   useEffect(()=>{
     if(!products?.length) {
-      dispatch(fetAllProducts())
+      dispatch(fetchAllProducts())
     }
   },[])
   
