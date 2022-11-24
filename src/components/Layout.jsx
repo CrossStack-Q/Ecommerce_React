@@ -18,7 +18,7 @@ const Layout = () => {
         <main className="w-screen overflow-hidden overflow-y-scroll">
           <Outlet />
         </main>
-        <footer>Made with ❤️</footer>
+        <footer>Made with ❤️ By</footer>
       </ThemeProvider>
     </div>
   );
