@@ -28,7 +28,7 @@ const Layout = () => {
             <br />
             Thanks{" "}
             <span className="text-3xl text-purple-600 font-bold">
-              &nbsp; Devsnest
+              &nbsp;Devsnest
             </span>
         </footer>
       </ThemeProvider>
