@@ -18,10 +18,19 @@ const Layout = () => {
         <main className="w-screen overflow-hidden overflow-y-scroll">
           <Outlet />
         </main>
-        <footer>Made with ❤️ By Anurag Sharma <br />
-        Thanks <span>
-          
-        </span>
+        <footer className="flex justify-center text-center text-xl p-4">
+          <div className="bg-blue-500 rounded-md bg-opacity-10 backdrop-blur-md p-2 border-2 border-white" >
+            Made with ❤️ By{" "}
+            <span className="text-2xl font-semibold text-blue-500">
+              {" "}
+              &nbsp; Anurag Sharma
+            </span>{" "}
+            <br />
+            Thanks{" "}
+            <span className="text-3xl text-purple-600 font-bold">
+              &nbsp; Devsnest
+            </span>
+          </div>
         </footer>
       </ThemeProvider>
     </div>
