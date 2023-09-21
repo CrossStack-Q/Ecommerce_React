@@ -24,11 +24,6 @@ const Layout = () => {
             <span className="text-2xl font-semibold text-blue-500">
               {" "}
               &nbsp; Anurag Sharma
-            </span>{" "}
-            <br />
-            Thanks{" "}
-            <span className="text-3xl text-purple-600 font-bold">
-              &nbsp;Devsnest
             </span>
         </footer>
       </ThemeProvider>
